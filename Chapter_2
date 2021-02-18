@@ -1,6 +1,8 @@
 import math
 import numpy as np
 import array
+#import scipy
+#from scipy import special
 
 # normal array
 li = list(range(10))
@@ -122,4 +124,91 @@ p = np.vstack([y,z]) #vertically stacking y and z
 q = np.hstack([z,x]) #horizontally stacking z and x
 # use np.dstack for third axis
 
+#Splitting arrays
+k = [1,2,3,99,99,3,2,1]
+k1, k2, k3 = np.split(x,[3,5]) #Splitting a 1D array at indices 3 and 5
+print(k1, k2, k3)
 
+grid2 = np.arange(16).reshape((4,4))
+upper, lower = np.vsplit(grid2, [2]) #Splitting a 2D array vertically at row 2
+print(upper,lower, sep='\n')
+
+leftgrid, rightgrid = np.hsplit(grid2,[1]) #Splitting a 2D array horizontally at col 1
+print(leftgrid, rightgrid, sep='\n')
+#dsplit along third axis
+
+#ufuncs = functions on arrays: quicker to do an operation on the array as a whole than each indiv element
+
+#arithmetic is same
+
+print('y =', y)
+print('y + 2 =', y+2)
+print('y - 3 =', y-3)
+print('y * 4 =', y*4)
+print('y / 2 =', y/2)
+print('y // 2 =', y//2)
+print('y ** 3 =', y**3)
+print('y % 2 =', y%2)
+
+w = [-2,-1,0,1,2]
+print('w = ',w)
+print('|w| = ',np.abs(w))
+
+theta = np.linspace(0,np.pi,5)
+print("theta = ",theta)
+print("sin(theta) = ",np.sin(theta))
+print("cos(theta) = ",np.cos(theta))
+print("tan(theta) = ",np.tan(theta))
+
+print('y = ', y)
+print('e^y = ', np.exp(y))
+print('2^y = ', np.exp2(y))
+print('3^y = ', np.power(3,y))
+print('ln(y) = ', np.log(y))
+print('log2(y) = ', np.log2(y))
+print('log10(y) = ', np.log10(y))
+
+# other ufuncs, use 'from scipy import special' - figure out how to import
+
+#print('gamma(y) =', special.gamma(y))
+#print('ln|gamma(y)| =', special.gammaln(y))
+#print('beta(y,2) =', special.beta(y,2))
+#print('erf(y) =', special.erf(y))           #error fn (integral of gaussian)
+#print('erfc(y) =', special.erfc(y))         #complement to erf
+#print('erfinv(y) =', special.erfinv(y))     #inverse of erf
+
+#Specifying output
+
+m = np.arange(5)
+n = np.empty(5)
+np.multiply(m,10,out=n)
+print('m = ',m)
+print('n = ', n)
+n2 = np.zeros(10)
+np.power(2,m,out=n2[::2])
+print('n2 = ',n2)
+
+m1 = m+1
+print(m1)
+m1a = np.add.reduce(m1)        #sum of elems of m2
+print(m1a)
+m1p = np.multiply.reduce(m1)   #prod of elems of m2
+print(m1p)
+m1pa = np.multiply.accumulate(m1) #gives intermediary products of elems of m (r(i)=prod of elems m(0:i))
+print(m1pa)
+
+print(np.multiply.outer(m1,m1)) #outer product of vectors(can use outer on pretty much any operation)
+
+m1s = np.sum(m1)            #numpy functions much faster
+m1m = np.min(m1)
+m1M = np.max(m1)
+print(m1s, m1m, m1M)
+
+pColmin = p.min(axis=0)
+pRowmax = p.max(axis=1)
+
+#see p.61 for other aggregates
+
+##Example: Presidential heights
+
+#Broadcasting: adding mismatched arrays creates a larger one

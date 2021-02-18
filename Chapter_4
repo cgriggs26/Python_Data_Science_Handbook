@@ -1,0 +1,47 @@
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.style.use('classic')
+
+x = np.linspace(0,10,100)
+
+#fig = plt.figure() #name the figure, helpful for saving (do this BEFORE plotting)
+#plt.plot(x,np.sin(x))
+#plt.plot(x,np.cos(x))          #this will give two lines on one plot
+
+##Two types of interfaces
+
+##MATLAB style (convenient?)
+
+# plt.figure() #create the plot figure
+
+# #create first panel in fig, set axis
+# plt.subplot(2,1,1) #rows, columns, panel number
+# plt.plot(x, np.sin(x))
+
+# #create second panel
+# plt.subplot(2,1,2)
+# plt.plot(x, np.cos(x))        #two subplots, each with a different line
+
+##Object-oriented (more powerful?)
+
+#Create a grid of plots (ax is an array of two Axes objects)
+fig, ax = plt.subplots(2)
+
+#Call plot() on appropriate object
+ax[0].plot(x, np.sin(x))
+ax[1].plot(x, np.cos(x))        #two subplots, each with a different line
+
+#negligible difference with simpler figures, but object-oriented more efficient for complex figs
+
+#Leave this part at end
+
+plt.show() # makes the plot(s) appear. ONLY USE ONCE IN CODE otherwise could give weird behavior
+
+#Saving the picture (don't need to .show() to save)
+
+#fig.savefig('trig_fig.png')        #[name of figure].savefig('[name of file]')
+
+#can also save as .eps, .jpeg, .jpg, .pdf, .pgf, .png, .ps, .raw, .rgba, .svg, .svgz, .tif, .tiff
+
